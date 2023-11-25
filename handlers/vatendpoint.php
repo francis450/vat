@@ -14,7 +14,12 @@ switch ($method) {
         while ($row = $result->fetch_assoc()) {
             $invoices[] = $row;
         }
+
+        // Send the JSON response
+        header('Content-Type: application/json');
+        echo json_encode($invoices);
         break;
+
 
     case 'POST':
         // Handle POST requests
