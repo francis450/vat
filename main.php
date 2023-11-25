@@ -15,9 +15,32 @@ if(isset($_SESSION["name"]) && $_SESSION["token"]){
     <title>Invoice Form</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
-    <div class="mx-auto container">
+    <!-- nav start -->
+    <div class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+            <div class="nav-title">
+            BIGROVAT
+            </div>
+        </div>
+        <div class="nav-btn">
+            <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+            </label>
+        </div>
+        
+        <div class="nav-links" style="z-index:1000">
+            <a href="invoices.php" target="_blank">Invoices</a>
+            <a href="upload.php" target="_blank">Upload</a>
+        </div>
+    </div>
+    <!-- nav end -->
+    <div class="mx-auto container" style="margin-top: 20px">
         <!-- Progress Form -->
         <form id="progress-form" class="p-4 progress-form" action="handlers/vatendpoint.php" lang="en" novalidate>
 
@@ -186,4 +209,5 @@ if(isset($_SESSION["name"]) && $_SESSION["token"]){
     </div>
 </body>
 <script src="js/main.js"></script>
+<script src="js/navbar.js"></script>
 </html>
