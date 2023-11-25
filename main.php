@@ -167,7 +167,7 @@ if(isset($_SESSION["name"]) && $_SESSION["token"]){
                 Back
                 </button>
                 <button type="submit">
-                Submit
+                Save
                 </button>
             </div>
             </section>
