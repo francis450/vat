@@ -22,7 +22,7 @@ function submitForm() {
             $('#progress-form :input').each(function () {
               $(this).val('');
             })
-            // location.reload;
+            location.reload;
             // Handle success response
         },
         error: function (error) {
@@ -662,9 +662,9 @@ const validateCheckbox = field => {
 
     if (progressForm.contains(submitButton)) {
 
-      // Update the state of the submit button
-      submitButton.setAttribute('disabled', '');
-      submitButton.textContent = 'Submitting...';
+      // // Update the state of the submit button
+      // submitButton.setAttribute('disabled', '');
+      // submitButton.textContent = 'Saving...';
 
     }
   }
