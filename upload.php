@@ -32,9 +32,9 @@
     </style>
 </head>
 <body>
-    <div class="col-12 grid-margin">
-        <div class="card m-1">
-            <div class="card-body">
+    <div class="col-12 grid-margin" style="display: flex;flex-direction: column;align-items: center;">
+        <div class="card m-1" style="width: 100%;max-width: 1000px;">
+            <div class="card-body" >
                 <!-- <h4 class="card-title">Import Data</h4> -->
                 <div style="display:flex;justify-content:space-around;">
                     <div class="form-group">

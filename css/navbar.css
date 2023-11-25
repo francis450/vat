@@ -7,14 +7,21 @@ body {
   font-family: 'segoe ui';
 }
 
-.nav {
+/* .nav {
   height: 60px;
   width: 100%;
   background-color: white;
   position: relative;
   margin: 5px;
+} */
+.nav {
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    position: relative;
+    margin: 5px;
+    max-width: 900px;
 }
-
 .nav > .nav-header {
   display: inline;
 }

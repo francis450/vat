@@ -17,7 +17,7 @@ if(isset($_SESSION["name"]) && $_SESSION["token"]){
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navbar.css">
 </head>
-<body>
+<body style="display: flex;flex-direction: column;align-items: center;">
     <!-- nav start -->
     <div class="nav">
         <input type="checkbox" id="nav-check">
