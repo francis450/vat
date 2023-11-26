@@ -98,7 +98,6 @@ ready(function() {
 
   const validateText = field => {
     const val = field.value.trim();
-
     if (val === '' && field.required) {
       return {
         isValid: false
@@ -764,4 +763,5 @@ const validateCheckbox = field => {
 
     });
   });
+  
 });

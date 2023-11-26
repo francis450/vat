@@ -35,7 +35,7 @@ if(isset($_SESSION["name"]) && $_SESSION["token"]){
         </div>
         
         <div class="nav-links" style="z-index:1000">
-            <a href="invoices.php" target="_blank">Invoices</a>
+            <a href="invoice.php" target="_blank">Invoices</a>
             <a href="upload.php" target="_blank">Upload</a>
         </div>
     </div>
@@ -66,8 +66,8 @@ if(isset($_SESSION["name"]) && $_SESSION["token"]){
                     <span data-required="true" aria-hidden="true"></span>
                 </label>
                 <select name="invoiceType" id="invoiceType">
-                    <option value="exempt">Sales(VAT)</option>
-                    <option value="vatable">Sales(No VAT)</option>
+                    <option value="vatable">Sales(VAT)</option>
+                    <option value="exempt">Sales(No VAT)</option>
                     <option value="purchase">Purchase</option>
                     <option value="expense">Expense</option>
                 </select>
@@ -209,5 +209,22 @@ if(isset($_SESSION["name"]) && $_SESSION["token"]){
     </div>
 </body>
 <script src="js/main.js"></script>
-<script src="js/navbar.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#invoiceType').change(function(){
+            let val = $('#invoiceType').val();
+            let inputsTODisable = document.querySelectorAll('#customerPin, #CUSerialNumber, #CUSerialNumber, #vat, #withholding');
+                
+            if(val === 'exempt' || val == 'expense'){
+                for (input of inputsTODisable){
+                    input.setAttribute('disabled', true)
+                }
+            }else{
+                for (input of inputsTODisable){
+                    input.removeAttribute('disabled')
+                }
+            }
+        });
+    })
+</script>
 </html>
