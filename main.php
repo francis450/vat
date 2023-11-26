@@ -2,7 +2,7 @@
 session_start();
 include("connection.php");
 
-if(isset($_SESSION["name"]) && $_SESSION["token"]){
+if(!isset($_SESSION["name"])){
     header("location: index.php");
 }
 
