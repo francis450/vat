@@ -35,8 +35,8 @@ if(isset($_SESSION["name"]) && $_SESSION["token"]){
         </div>
         
         <div class="nav-links" style="z-index:1000">
-            <a href="invoice.php" target="_blank">Invoices</a>
-            <a href="upload.php" target="_blank">Upload</a>
+            <a href="invoice.php">Invoices</a>
+            <a href="upload.php">Upload</a>
         </div>
     </div>
     <!-- nav end -->

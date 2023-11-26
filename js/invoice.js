@@ -33,6 +33,7 @@ $(document).ready(function(){
             $('#example').DataTable({
                 data: data,
                 columns: [
+                    { data: 'name'},
                     { data: 'invoiceType' },
                     { data: 'invoiceNumber' },
                     {
