@@ -1,6 +1,11 @@
 <?php
 session_start();
 include("connection.php");
+
+if(!isset($_SESSION["name"])){
+    header("location: index.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +40,7 @@ include("connection.php");
 </head>
 <body style="width: 100vw; display: flex;background: #f0f4F8; color=#102a43 ;flex-direction: column;align-items: center;">
     <!-- nav start -->
-    <div class="nav" style="display:flex;justify-content: space-between;">
+    <div class="nav" style="display:flex;justify-content: space-between;position:static;">
         <input type="checkbox" id="nav-check">
         <div class="nav-header">
             <div class="nav-title">
@@ -57,7 +62,7 @@ include("connection.php");
         </div>
     </div>
     <!-- nav end -->
-    <div class="card">
+    <div class="card" style="margin-top: 90px;">
         <div class="card-body">
             <table id="example" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
                 <thead>
@@ -87,9 +92,7 @@ include("connection.php");
                         <th rowspan="1" colspan="1">Action</th>
                     </tr>
                 </tfoot>
-                <tbody>
-
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>

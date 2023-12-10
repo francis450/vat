@@ -20,7 +20,8 @@ body {
     background-color: white;
     position: relative;
     margin: 5px;
-    max-width: 900px;
+    /* max-width: 900px; */
+    max-width: 90%;
 }
 .nav > .nav-header {
   display: inline;
@@ -59,6 +60,9 @@ body {
 }
 
 @media (max-width:600px) {
+  .nav {
+    max-width: 100%;
+  }
   .nav > .nav-btn {
     display: inline-block;
     position: absolute;
