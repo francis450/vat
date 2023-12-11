@@ -707,7 +707,6 @@ const validateCheckbox = field => {
   }
 
   /****************************************************************************/
-
   progressForm.addEventListener('submit', e => {
 
     // Prevent the form from submitting

@@ -23,7 +23,7 @@ if(!isset($_SESSION["name"])){
         <input type="checkbox" id="nav-check">
         <div class="nav-header">
             <div class="nav-title">
-            BIGROVAT
+                BIGROVAT
             </div>
         </div>
         <div class="nav-btn">
@@ -68,73 +68,21 @@ if(!isset($_SESSION["name"])){
                 <select name="invoiceType" id="invoiceType">
                     <option value="vatable">Sales(VAT)</option>
                     <option value="exempt">Sales(No VAT)</option>
-                    <option value="purchase">Purchase</option>
-                    <option value="expense">Expense</option>
+                    <option value="purchase">Purchase(VAT)</option>
+                    <option value="expense">Purchase(No VAT)</option>
                 </select>
                 </div>
 
                 <div class="mt-3 sm:mt-0 form__field">
-                <label for="name">
-                    Business Name
-                    <span data-required="true" aria-hidden="true"></span>
-                </label>
-                <input type="text" name="name" autocomplete="name">
-                </div>
-            </div>
-            <div class="sm:d-grid sm:grid-col-2 sm:mt-3">
-                <div class="mt-3 sm:mt-0 form__field">
-                
-                <label for="last-name">
-                    Amount
-                    <span data-required="true" aria-hidden="true"></span>
-                </label>
-                <input id="amount" type="number" name="amount" autocomplete="amount" required>
-                </div>
-
-                <div class="mt-3 sm:mt-0 form__field">
-                <label for="invoiceNumber">
-                    Invoice Number
-                    <span data-required="true" aria-hidden="true"></span>
-                </label>
-                <input id="invoiceNumber" type="text" name="invoiceNumber" autocomplete="invoiceNumber" required>
-                </div>
-            </div>
-            <div class="sm:d-grid sm:grid-col-2 sm:mt-3">
-                <div class="mt-3 form__field">
-                    <label class="form__choice-wrapper" for="paid">
-                        <input id="paid" type="checkbox" name="paid">
-                        <span>Click If Amount Above is Already Paid</span>
+                    <label for="name">
+                        Business Name
+                        <span data-required="true" aria-hidden="true"></span>
                     </label>
+                    <input type="text" name="name" id="name" autocomplete="Business Name">
                 </div>
-                <div class="mt-3 sm:mt-0 form__field">
-                <label for="invoiceDate">
-                    Invoice Date
-                    <span data-required="true" aria-hidden="true"></span>
-                </label>
-                <input id="invoiceDate" type="date" name="invoiceDate" autocomplete="invoiceDate" required>
-                </div>
-            </div>
-            <!-- <input type="checkbox" name="try" checked class="try">
-                <input type="checkbox" name="try"  class="try">    -->
-                <script>
-                    // function handleCheck(e){
-                    //     let {value, name} = e.target;
-                    //     console.log(value,name)                    
-                    // }
-                    // $('.try').change(function(e){
-                    //     handleCheck(e);        
-                    // })
-                </script>
-            <div class="d-flex align-items-center justify-center sm:justify-end mt-4 sm:mt-5">
-                <button type="button"  data-action="next" >
-                Continue
-                </button>
-            </div>
-            </section>
-            <!-- / End Step 1 -->
 
-            <!-- Step 2 -->
-            <section id="progress-form__panel-2" role="tabpanel" aria-labelledby="progress-form__tab-2" tabindex="0" hidden>
+                
+            </div>
             <div class="sm:d-grid sm:grid-col-2 sm:mt-3">
                 <div class="mt-3 sm:mt-0 form__field">
                     <label for="item">
@@ -144,45 +92,102 @@ if(!isset($_SESSION["name"])){
                     <input id="item" type="text" name="item" autocomplete="item" required>
                 </div>
                 <div class="mt-3 sm:mt-0 form__field">
+                    <label for="last-name">
+                        Amount
+                        <span data-required="true" aria-hidden="true"></span>
+                    </label>
+                    <input id="amount" type="number" name="amount" autocomplete="amount" required>
+                </div>
+            </div>
+            <div class="sm:d-grid sm:grid-col-2 sm:mt-3">
+                <div class="mt-3 sm:mt-0 form__field">
+                    <label for="invoiceNumber">
+                        Invoice Number
+                        <span data-required="true" aria-hidden="true"></span>
+                    </label>
+                    <input id="invoiceNumber" type="text" name="invoiceNumber" autocomplete="invoiceNumber" required>
+                </div>
+
+                <div class="mt-3 sm:mt-0 form__field">
+                    <label for="invoiceDate">
+                        Invoice Date
+                        <span data-required="true" aria-hidden="true"></span>
+                    </label>
+                    <input id="invoiceDate" type="date" name="invoiceDate" autocomplete="invoiceDate" required>
+                </div>
+            </div>
+            <div class="sm:d-grid sm:grid-col-2 sm:mt-3">
+                <div class="mt-3 form__field">
+                    <label class="form__choice-wrapper" for="paid">
+                        <input id="paid" type="checkbox" name="paid">
+                        <span>Click If Amount Above is Already Paid</span>
+                    </label>
+                </div>
+                <div class="d-flex align-items-center justify-center sm:justify-end mt-4 sm:mt-5">
+                    <button id="continue" type="button"  data-action="next" >
+                    Continue
+                    </button>
+                </div>
+            </div>
+            
+            </section>
+            <!-- / End Step 1 -->
+
+            <!-- Step 2 -->
+            <section id="progress-form__panel-2" role="tabpanel" aria-labelledby="progress-form__tab-2" tabindex="0" hidden>
+            <div class="sm:d-grid sm:grid-col-2 sm:mt-3">
+                <div class="mt-3 sm:mt-0 form__field">
                     <label for="customerPin">
                     Customer Pin
                     </label>
                     <input id="customerPin" type="text" name="customerPin" autocomplete="customerPin">
                 </div>
-            </div>
-            
-            
-            <div class="sm:d-grid sm:grid-col-2 sm:mt-3">
                 <div class="mt-3 sm:mt-0 form__field">
                     <label for="CUSerialNumber">
                     CU Serial Number
                     </label>
                     <input id="CUSerialNumber" type="text" name="CUSerialNumber" autocomplete="CUSerialNumber">
                 </div>
+            </div>           
+            
+            <div class="sm:d-grid sm:grid-col-2 sm:mt-3">
                 <div class="mt-3 sm:mt-0 form__field">
                     <label for="CUSerialNumber">
                     CU Invoice Number
                     </label>
                     <input id="CUSerialNumber" type="text" name="CUInvoiceNumber" autocomplete="CUInvoiceNumber">
                 </div>
+                <div class="mt-3 sm:mt-0 form__field">
+                    <div class="mt-3 sm:mt-0 form__field">
+                        <input id="vat" type="checkbox" name="vat" autocomplete="vat">
+                        <label for="vat" style="display:inline">
+                        VAT(16%)
+                        </label>
+                    <!-- </div>
+                    <div class="mt-3 sm:mt-0 form__field"> -->
+                        <input id="withholding" type="checkbox" name="withholding" autocomplete="withholding">
+                        <label for="withholding" style="display:inline">
+                        Withholding(2%)
+                        </label>
+                        
+                    </div> 
+                </div>
             </div>
 
             <div class="sm:d-grid sm:grid-col-2 sm:mt-3">
-                <div class="mt-3 sm:mt-0 form__field">
+                <!-- <div class="mt-3 sm:mt-0 form__field">
                     <input id="vat" type="checkbox" name="vat" autocomplete="vat">
                     <label for="vat" style="display:inline">
                     VAT(16%)
-                    </label>
-                </div>
-                <div class="mt-3 sm:mt-0 form__field">
-                    <input id="withholding" type="checkbox" name="withholding" autocomplete="withholding">
+                    </label> -->
+                <!-- </div>
+                <div class="mt-3 sm:mt-0 form__field"> -->
+                    <!-- <input id="withholding" type="checkbox" name="withholding" autocomplete="withholding">
                     <label for="withholding" style="display:inline">
                     Withholding(2%)
                     </label>
                     
-                </div>
-
-                
+                </div>                 -->
             </div>
 
             <div class="d-flex flex-column-reverse sm:flex-row align-items-center justify-center sm:justify-end mt-4 sm:mt-5">
@@ -214,17 +219,61 @@ if(!isset($_SESSION["name"])){
         $('#invoiceType').change(function(){
             let val = $('#invoiceType').val();
             let inputsTODisable = document.querySelectorAll('#customerPin, #CUSerialNumber, #CUSerialNumber, #vat, #withholding');
-                
+            let continueButton = document.getElementById('continue');
+            var name = $('#name').val();
+
             if(val === 'exempt' || val == 'expense'){
+                //Disable appropriate inputs
                 for (input of inputsTODisable){
                     input.setAttribute('disabled', true)
                 }
+                //change continue button to submit
+                continueButton.textContent = "Save";
+                continueButton.type = "submit";
+                continueButton.removeAttribute('data-action');
             }else{
                 for (input of inputsTODisable){
                     input.removeAttribute('disabled')
                 }
+                //Restore changes made if any
+                continueButton.textContent = "Continue";
+                continueButton.type = "button";
+                continueButton.setAttribute('data-action', 'next');
+
+                if(name){
+                    autofill();
+                }
             }
         });
-    })
+        $('#name').change(function(){
+            autofill();
+        });
+    });
+    function autofill(){
+        var name = $('#name').val();
+        var invoiceType  = $('#invoiceType').val();
+        console.log('InvoiceType: '+invoiceType);
+        console.log('name: '+name);
+        
+        if(invoiceType === 'exempt' || invoiceType == 'expense'){
+            return;
+        }else{
+            $.post('handlers/handlebusinessname.php',{name:name, invoiceType:invoiceType,},function(response){
+                if(response){
+                    var res = JSON.parse(response);
+                    // console.log('customerPin: '+res.customerPin);
+                    // console.log('CUSerialNumber: '+ res.CUSerialNumber);
+                    $('#customerPin').val(res.customerPin);
+                    $('#CUSerialNumber').val(res.CUSerialNumber);
+                    $('#vat').prop('checked', true);
+                    $('#withholding').prop('checked', true);
+                    
+                    if(res.CUSerialNumber){
+                        $('#CUSerialNumber').val(res.CUSerialNumber + 1 );
+                    }
+                }
+            });
+        }
+    }
 </script>
 </html>
