@@ -62,7 +62,7 @@ if(!isset($_SESSION["name"])){
         </div>
     </div>
     <!-- nav end -->
-    <div class="card" style="margin-top: 90px;">
+    <div class="card" style="margin-top: 20px;">
         <div class="card-body">
             <table id="example" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
                 <thead>

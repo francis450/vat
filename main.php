@@ -35,6 +35,8 @@ if(!isset($_SESSION["name"])){
         </div>
         
         <div class="nav-links" style="z-index:1000">
+            <!-- <a type="button">Add Business</a>
+            <a type="button">Add Item</a> -->
             <a href="invoice.php">Invoices</a>
             <a href="upload.php">Upload</a>
         </div>
@@ -78,7 +80,11 @@ if(!isset($_SESSION["name"])){
                         Business Name
                         <span data-required="true" aria-hidden="true"></span>
                     </label>
-                    <input type="text" name="name" id="name" autocomplete="Business Name">
+                    <select name="name" id="name" >
+                        <option value="">Select Item</option>
+                        <option value="add">Add New Item</option>
+                        <option value=""></option>
+                    </select>
                 </div>
 
                 
@@ -89,8 +95,15 @@ if(!isset($_SESSION["name"])){
                     Item
                     <span data-required="true" aria-hidden="true"></span>
                     </label>
-                    <input id="item" type="text" name="item" autocomplete="item" required>
+                    <!-- <input id="item" type="text" name="item" autocomplete="item" required> -->
+                    <select name="item" id="item">
+                        <option value="">Select Item</option>
+                        <option value="add">Add New Item</option>
+                        <option value=""></option>
+                    </select>
+                    
                 </div>
+                
                 <div class="mt-3 sm:mt-0 form__field">
                     <label for="last-name">
                         Amount
@@ -201,7 +214,6 @@ if(!isset($_SESSION["name"])){
             </section>
             <!-- / End Step 2 -->
 
-
             <!-- Thank You -->
             <section id="progress-form__thank-you" hidden>
             <p>Thank you for your submission!</p>
@@ -213,67 +225,130 @@ if(!isset($_SESSION["name"])){
         <!-- / End Progress Form -->
     </div>
 </body>
-<script src="js/main.js"></script>
-<script>
-    $(document).ready(function(){
-        $('#invoiceType').change(function(){
-            let val = $('#invoiceType').val();
-            let inputsTODisable = document.querySelectorAll('#customerPin, #CUSerialNumber, #CUSerialNumber, #vat, #withholding');
-            let continueButton = document.getElementById('continue');
-            var name = $('#name').val();
+    <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#item').change(function() {
+                if ($(this).val() == 'add')
+                {
+                    var newThing = prompt('Enter New Item:');
+                    if(newThing){
+                        $.post('handlers/items.php',{item: newThing},function (response) {
+                            console.log("Item Addedd: "+ newThing);
+                            if(response){
+                                var newOption = $("<option></option>")
+                                    .attr("value", response)
+                                    .text(response);
 
-            if(val === 'exempt' || val == 'expense'){
-                //Disable appropriate inputs
-                for (input of inputsTODisable){
-                    input.setAttribute('disabled', true)
+                                $('#item').append(newOption);
+                            }                       
+                        })
+                    }
+                    
                 }
-                //change continue button to submit
-                continueButton.textContent = "Save";
-                continueButton.type = "submit";
-                continueButton.removeAttribute('data-action');
-            }else{
-                for (input of inputsTODisable){
-                    input.removeAttribute('disabled')
-                }
-                //Restore changes made if any
-                continueButton.textContent = "Continue";
-                continueButton.type = "button";
-                continueButton.setAttribute('data-action', 'next');
+            });
+            $('#name').change(function() {
+                if ($(this).val() == 'add')
+                {
+                    var newThing = prompt('Enter New Item:');
+                    if(newThing){
+                        $.post('handlers/name.php',{name: newThing},function (response) {
+                            // console.log("Item Addedd: "+ newThing);
+                            if(response){
+                                var newOption = $("<option></option>")
+                                    .attr("value", response)
+                                    .text(response);
 
-                if(name){
+                                $('#name').append(newOption);
+                            }                       
+                        })
+                    }
+                    
+                }else{
                     autofill();
                 }
-            }
-        });
-        $('#name').change(function(){
-            autofill();
-        });
-    });
-    function autofill(){
-        var name = $('#name').val();
-        var invoiceType  = $('#invoiceType').val();
-        console.log('InvoiceType: '+invoiceType);
-        console.log('name: '+name);
-        
-        if(invoiceType === 'exempt' || invoiceType == 'expense'){
-            return;
-        }else{
-            $.post('handlers/handlebusinessname.php',{name:name, invoiceType:invoiceType,},function(response){
-                if(response){
-                    var res = JSON.parse(response);
-                    // console.log('customerPin: '+res.customerPin);
-                    // console.log('CUSerialNumber: '+ res.CUSerialNumber);
-                    $('#customerPin').val(res.customerPin);
-                    $('#CUSerialNumber').val(res.CUSerialNumber);
-                    $('#vat').prop('checked', true);
-                    $('#withholding').prop('checked', true);
-                    
-                    if(res.CUSerialNumber){
-                        $('#CUSerialNumber').val(res.CUSerialNumber + 1 );
+            });
+            $.get('handlers/items.php',function(response){
+                // console.log(response);
+                let data = JSON.parse(response);
+                for(let i = 0; i < data.length; i++){
+                    // console.log(data[i]);
+                    var newOption = $("<option></option>")
+                                    .attr("value", data[i])
+                                    .text(data[i]);
+
+                                $('#item').append(newOption);
+                }
+            });
+            $.get('handlers/name.php',function(response){
+                // console.log(response);
+                let data = JSON.parse(response);
+                for(let i = 0; i < data.length; i++){
+                    // console.log(data[i]);
+                    var newOption = $("<option></option>")
+                                    .attr("value", data[i])
+                                    .text(data[i]);
+
+                                $('#name').append(newOption);
+                }
+            })
+            $('#invoiceType').change(function(){
+                let val = $('#invoiceType').val();
+                let inputsTODisable = document.querySelectorAll('#customerPin, #CUSerialNumber, #CUSerialNumber, #vat, #withholding');
+                let continueButton = document.getElementById('continue');
+                var name = $('#name').val();
+
+                if(val === 'exempt' || val == 'expense'){
+                    //Disable appropriate inputs
+                    for (input of inputsTODisable){
+                        input.setAttribute('disabled', true)
+                    }
+                    //change continue button to submit
+                    continueButton.textContent = "Save";
+                    continueButton.type = "submit";
+                    continueButton.removeAttribute('data-action');
+                }else{
+                    for (input of inputsTODisable){
+                        input.removeAttribute('disabled')
+                    }
+                    //Restore changes made if any
+                    continueButton.textContent = "Continue";
+                    continueButton.type = "button";
+                    continueButton.setAttribute('data-action', 'next');
+
+                    if(name){
+                        autofill();
                     }
                 }
             });
+            // $('#name').change(function(){
+            // });
+        });
+        function autofill(){
+            var name = $('#name').val();
+            var invoiceType  = $('#invoiceType').val();
+            console.log('InvoiceType: '+invoiceType);
+            console.log('name: '+name);
+            
+            if(invoiceType === 'exempt' || invoiceType == 'expense'){
+                return;
+            }else{
+                $.post('handlers/handlebusinessname.php',{name:name, invoiceType:invoiceType,},function(response){
+                    if(response){
+                        var res = JSON.parse(response);
+                        // console.log('customerPin: '+res.customerPin);
+                        // console.log('CUSerialNumber: '+ res.CUSerialNumber);
+                        $('#customerPin').val(res.customerPin);
+                        $('#CUSerialNumber').val(res.CUSerialNumber);
+                        $('#vat').prop('checked', true);
+                        $('#withholding').prop('checked', true);
+                        
+                        if(res.CUSerialNumber){
+                            $('#CUSerialNumber').val(res.CUSerialNumber + 1 );
+                        }
+                    }
+                });
+            }
         }
-    }
-</script>
+    </script>
 </html>
