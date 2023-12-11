@@ -98,7 +98,6 @@ ready(function() {
 
   const validateText = field => {
     const val = field.value.trim();
-
     if (val === '' && field.required) {
       return {
         isValid: false
@@ -708,7 +707,6 @@ const validateCheckbox = field => {
   }
 
   /****************************************************************************/
-
   progressForm.addEventListener('submit', e => {
 
     // Prevent the form from submitting
@@ -764,4 +762,5 @@ const validateCheckbox = field => {
 
     });
   });
+  
 });
