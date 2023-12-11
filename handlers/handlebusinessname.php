@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name']) && isset($_PO
     $invoiceType = htmlspecialchars($_POST['invoiceType'], ENT_QUOTES, 'UTF-8');
     // echo $name;
     $query;
-    if($invoiceType == 'purchase'){
+    if($invoiceType == 'vatable'){
         $name = 'Bigbro Enterprises';
         $query = mysqli_query($con, "SELECT customerPin, CUSerialNumber, CUInvoiceNumber FROM invoices where name = '$name'");
     }else{
