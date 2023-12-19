@@ -1,27 +1,3 @@
-// $(function () {
-//   $('#example').dataTable({
-//     paging: false,
-//     fixedHeader: {
-//       header: true
-//     },
-// 		dom: 'Bfrtip',
-// 		buttons: [
-//       {
-//         extend: 'excel',
-//         text: 'Excel <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
-//       },
-//       {
-//         extend: 'pdf',
-//         text: 'PDF <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
-//       },
-      
-// 			'copy',
-// 			'pdf',
-// 			'colvis'
-// 		],
-    
-//   });   
-// });
 
 $(document).ready(function(){
 		$.ajax({	
@@ -73,14 +49,48 @@ $(document).ready(function(){
                             // Return the HTML for the icon with the 'data-id' attribute
                             return '<i style="cursor: pointer;" class="fas fa-info-circle moreInfo" data-id="' + idValue + '"></i>&nbspMore';
                         }
-                    }
-                    // { data: 'invoiceType' },
-                    // { data: 'name' },
-                    // { data: 'customerPin' },
-                    // { data: 'CUInvoiceNumber' },
-                    // { data: 'CUSerialNumber' },
-                    // { data: 'withholding' },
-                    
+                    }                    
+                ],
+                paging: true,
+                fixedHeader: {
+                    header: true
+                },
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'excel',
+                            text: 'Excel <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
+                        },
+                        {
+                            extend: 'pdf',
+                            text: 'PDF <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
+                        },
+                        
+                        'copy',
+                        'pdf',
+                        'colvis'
+                    ],
+            });
+            $('#example1').DataTable({
+                data: data,
+                columns: [
+                    { data: 'name'},
+                    { data: 'customerPin' },
+                    {
+                        data: 'amount',
+                        render: function (data, type, row) {
+                            // Format the 'amount' column with commas
+                            return parseFloat(data);
+                        }
+                    },
+                    { 
+                        data: 'amount',
+                        render: function(data, type, row) {
+                            return parseFloat(data*0.16);
+                        } 
+                    },
+                    { data: 'CUInvoiceNumber' },
+                    { data: 'dated'},               
                 ],
                 paging: true,
                 fixedHeader: {

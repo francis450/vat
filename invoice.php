@@ -90,13 +90,30 @@ if(!isset($_SESSION["name"])){
                         <th rowspan="1" colspan="1">Paid</th>
                         <th rowspan="1" colspan="1">Filed</th>
                         <th rowspan="1" colspan="1">Action</th>
+
                     </tr>
                 </tfoot>
                 <tbody></tbody>
             </table>
         </div>
+
     </div>
-        
+    <div class="card mt-4">
+        <div class="card-body row">
+            <table class="table col-12 table-bordered table-striped" id="example1">
+                <thead>
+                    <tr>
+                        <th>Business Name</th>
+                        <th>Pin</th>
+                        <th>Invoice Amount</th>
+                        <th>Tax Amount</th>
+                        <th>CU Invoice Number</th>
+                        <th>Date</th>                        
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 </body>
 <script src="js/invoice.js"></script>
 <!-- <script src="js/navbar.js"></script> -->
