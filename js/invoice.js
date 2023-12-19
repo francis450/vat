@@ -1,15 +1,15 @@
 
-$(document).ready(function(){
-		$.ajax({	
+$(document).ready(function () {
+    $.ajax({
         url: 'handlers/vatendpoint.php',
         type: 'GET',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             // Initialize DataTable
             $('#example').DataTable({
                 data: data,
                 columns: [
-                    { data: 'name'},
+                    { data: 'name' },
                     { data: 'invoiceType' },
                     { data: 'invoiceNumber' },
                     {
@@ -20,22 +20,22 @@ $(document).ready(function(){
                         }
                     },
                     { data: 'invoiceDate' },
-                    { 
+                    {
                         data: 'paid',
-                        render: function(data, type, row) {
-                            if(row.paid == 1){
+                        render: function (data, type, row) {
+                            if (row.paid == 1) {
                                 return 'Yes';
-                            }else{
+                            } else {
                                 return 'No';
                             }
                         }
                     },
-                    { 
+                    {
                         data: 'filed',
-                        render: function(data, type, row) {
-                            if(row.filed == 1){
+                        render: function (data, type, row) {
+                            if (row.filed == 1) {
                                 return 'Yes';
-                            }else{
+                            } else {
                                 return 'No';
                             }
                         }
@@ -49,32 +49,33 @@ $(document).ready(function(){
                             // Return the HTML for the icon with the 'data-id' attribute
                             return '<i style="cursor: pointer;" class="fas fa-info-circle moreInfo" data-id="' + idValue + '"></i>&nbspMore';
                         }
-                    }                    
+                    }
                 ],
                 paging: true,
                 fixedHeader: {
                     header: true
                 },
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'excel',
-                            text: 'Excel <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
-                        },
-                        {
-                            extend: 'pdf',
-                            text: 'PDF <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
-                        },
-                        
-                        'copy',
-                        'pdf',
-                        'colvis'
-                    ],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: 'Excel <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'PDF <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
+                    },
+
+                    'copy',
+                    'pdf',
+                    'colvis'
+                ],
             });
             $('#example1').DataTable({
                 data: data,
                 columns: [
-                    { data: 'name'},
+                    { data: 'invoiceNumber' },
+                    { data: 'name' },
                     { data: 'customerPin' },
                     {
                         data: 'amount',
@@ -83,35 +84,37 @@ $(document).ready(function(){
                             return parseFloat(data);
                         }
                     },
-                    { 
+                    {
                         data: 'amount',
-                        render: function(data, type, row) {
-                            return parseFloat(data*0.16);
-                        } 
+                        render: function (data, type, row) {
+                            console.log("vat: "+row.vat);
+                            return row.invoiceType != 'exempt' && row.invoiceType != 'exempt' ? parseFloat(data).toFixed(0) * 0.16 : 0;
+                        }
                     },
+
                     { data: 'CUInvoiceNumber' },
-                    { data: 'CUSerialNumber'},
-                    { data: 'dated'},               
+                    { data: 'CUSerialNumber' },
+                    { data: 'invoiceDate' },
                 ],
                 paging: true,
                 fixedHeader: {
                     header: true
                 },
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'excel',
-                            text: 'Excel <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
-                        },
-                        {
-                            extend: 'pdf',
-                            text: 'PDF <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
-                        },
-                        
-                        'copy',
-                        'pdf',
-                        'colvis'
-                    ],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: 'Excel <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'PDF <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>'
+                    },
+
+                    'copy',
+                    'pdf',
+                    'colvis'
+                ],
             });
         }
     });

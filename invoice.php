@@ -103,6 +103,7 @@ if(!isset($_SESSION["name"])){
             <table class="table col-12 table-bordered table-striped" id="example1">
                 <thead>
                     <tr>
+                        <th>Invoice Number</th>
                         <th>Business Name</th>
                         <th>Pin</th>
                         <th>Invoice Amount</th>
