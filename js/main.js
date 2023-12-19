@@ -1,39 +1,41 @@
 function submitForm() {
-    var formData = {};
-    $('#progress-form :input').each(function () {
-        if (this.tagName === 'select') {
-            formData[this.name] = $(this).val();
-        } else if (this.type === 'checkbox') {
-            formData[this.name] = this.checked; 
-        } else {
-            formData[this.name] = $(this).val();
-        }
-    });
+  var formData = {};
+  $('#progress-form :input').each(function () {
+    if (this.tagName === 'select') {
+      formData[this.name] = $(this).val();
+    } else if (this.type === 'checkbox') {
+      formData[this.name] = this.checked;
+    } else {
+      formData[this.name] = $(this).val();
+    }
+  });
 
 
-    $.ajax({
-        type: 'POST',
-        url: 'handlers/vatendpoint.php',
-        data: JSON.stringify(formData),
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (response) {
-            alert("Invoice Saved Successfully");
-            $('#progress-form :input').each(function () {
-              $(this).val('');
-            })
-            location.reload;
-            // Handle success response
-        },
-        error: function (error) {
-            alert("Invoice Saved Successfully");
-            // location.reload;
-            $('#progress-form :input').each(function () {
-              $(this).val('');
-            })
-            // Handle error
-        }
-    });
+  $.ajax({
+    type: 'POST',
+    url: 'handlers/vatendpoint.php',
+    data: JSON.stringify(formData),
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    success: function (response) {
+      alert(response);
+      if (response === 'Invoice Inserted Successfully') {
+        $('#progress-form :input').each(function () {
+          $(this).val('');
+        })
+        location.reload;
+      }
+      // Handle success response
+    },
+    error: function (error) {
+      alert("Invoice Saved Successfully");
+      // location.reload;
+      $('#progress-form :input').each(function () {
+        $(this).val('');
+      })
+      // Handle error
+    }
+  });
 }
 console.clear();
 
@@ -46,14 +48,14 @@ function ready(fn) {
   }
 }
 
-ready(function() {
+ready(function () {
 
   // Global Constants
 
   const progressForm = document.getElementById('progress-form');
 
-  const tabItems  = progressForm.querySelectorAll('[role="tab"]')
-      , tabPanels = progressForm.querySelectorAll('[role="tabpanel"]');
+  const tabItems = progressForm.querySelectorAll('[role="tab"]')
+    , tabPanels = progressForm.querySelectorAll('[role="tabpanel"]');
 
   let currentStep = 0;
 
@@ -136,7 +138,7 @@ ready(function() {
     const choices = fieldset.querySelectorAll('input[type="radio"], input[type="checkbox"]');
 
     let isRequired = false
-      , isChecked  = false;
+      , isChecked = false;
 
     for (const choice of choices) {
       if (choice.required) {
@@ -182,45 +184,45 @@ ready(function() {
     }
   }
 
-const validateDate = field => {
-  const val = field.value.trim();
+  const validateDate = field => {
+    const val = field.value.trim();
 
-  if (val === '' && field.required) {
+    if (val === '' && field.required) {
+      return {
+        isValid: false,
+        errorMessage: 'This field is required.'
+      };
+    }
+
+    const enteredDate = new Date(val);
+    const today = new Date();
+
+    if (enteredDate > today) {
+      return {
+        isValid: false,
+        errorMessage: 'Please enter a date later than today.'
+      };
+    }
+
     return {
-      isValid: false,
-      errorMessage: 'This field is required.'
+      isValid: true
     };
-  }
-
-  const enteredDate = new Date(val);
-  const today = new Date();
-
-  if (enteredDate > today) {
-    return {
-      isValid: false,
-      errorMessage: 'Please enter a date later than today.'
-    };
-  }
-
-  return {
-    isValid: true
   };
-};
 
-const validateCheckbox = field => {
+  const validateCheckbox = field => {
     const isChecked = field.checked;
-    if(isChecked){
+    if (isChecked) {
       console.log(field.value);
       return {
-            isValid: true,
-        };
-    }else{
-      console.log(field+" Not Checked ");
+        isValid: true,
+      };
+    } else {
+      console.log(field + " Not Checked ");
       return {
-            isValid: true,
-        };
+        isValid: true,
+      };
     }
-}
+  }
 
 
 
@@ -244,7 +246,7 @@ const validateCheckbox = field => {
         return validateCheckbox(field);
       case 'number':
         return validateNumber(field);
-      case 'date' :
+      case 'date':
         return validateDate(field);
       default:
         throw new Error(`The provided field type '${field.tagName}:${field.type}' is not supported in this form.`);
@@ -288,7 +290,7 @@ const validateCheckbox = field => {
   // Form Error and Success
 
   const FIELD_PARENT_CLASS = 'form__field'
-      , FIELD_ERROR_CLASS  = 'form__error-text';
+    , FIELD_ERROR_CLASS = 'form__error-text';
 
   /*****************************************************************************
    * Expects a Node (fieldset) that contains any number of radio or checkbox
@@ -324,7 +326,7 @@ const validateCheckbox = field => {
     const fieldParent = field.closest(`.${FIELD_PARENT_CLASS}`);
 
     if (progressForm.contains(fieldParent)) {
-      let fieldError   = fieldParent.querySelector(`.${FIELD_ERROR_CLASS}`)
+      let fieldError = fieldParent.querySelector(`.${FIELD_ERROR_CLASS}`)
         , fieldErrorId = '';
 
       if (!fieldParent.contains(fieldError)) {
@@ -429,8 +431,8 @@ const validateCheckbox = field => {
    */
 
   function activateTab(index) {
-    const thisTab   = tabItems[index]
-        , thisPanel = tabPanels[index];
+    const thisTab = tabItems[index]
+      , thisPanel = tabPanels[index];
 
     // Close all other tabs
     deactivateTabs();
@@ -469,10 +471,10 @@ const validateCheckbox = field => {
      * Otherwise, activate the tab at the beginning/end of the list.
      */
 
-    const targetPrev  = target.previousElementSibling
-        , targetNext  = target.nextElementSibling
-        , targetFirst = target.parentElement.firstElementChild
-        , targetLast  = target.parentElement.lastElementChild;
+    const targetPrev = target.previousElementSibling
+      , targetNext = target.nextElementSibling
+      , targetFirst = target.parentElement.firstElementChild
+      , targetLast = target.parentElement.lastElementChild;
 
     const isDisabled = node => node.hasAttribute('aria-disabled');
 
@@ -505,7 +507,7 @@ const validateCheckbox = field => {
 
   function handleProgress(isComplete) {
     const currentTab = tabItems[currentStep]
-        , nextTab    = tabItems[currentStep + 1];
+      , nextTab = tabItems[currentStep + 1];
 
     if (isComplete) {
       currentTab.setAttribute('data-complete', 'true');
@@ -714,7 +716,7 @@ const validateCheckbox = field => {
 
     // Get the API endpoint using the form action attribute
     const form = e.currentTarget
-        , API  = new URL(form.action);
+      , API = new URL(form.action);
 
     validateStep(currentStep).then(() => {
 
@@ -722,9 +724,9 @@ const validateCheckbox = field => {
       disableSubmit();
 
       // Prepare the data
-      const formData   = new FormData(form)
-          , formTime   = new Date().getTime()
-          , formFields = [];
+      const formData = new FormData(form)
+        , formTime = new Date().getTime()
+        , formFields = [];
 
       // Format the data entries
       for (const [name, value] of formData) {
@@ -738,17 +740,17 @@ const validateCheckbox = field => {
       // Build the final data structure, including the IP
       // POST the data and handle success or error
       Promise.all([submitForm()])
-      // .then(([data]) => postData(API, data))
-      .then(response => {
-        setTimeout(() => {
-          // handleSuccess(response);
-        }, 2000);
-      })
-      .catch(error => {
-        setTimeout(() => {
-          // handleError(error);
-        }, 5000);
-      });
+        // .then(([data]) => postData(API, data))
+        .then(response => {
+          setTimeout(() => {
+            // handleSuccess(response);
+          }, 2000);
+        })
+        .catch(error => {
+          setTimeout(() => {
+            // handleError(error);
+          }, 5000);
+        });
 
     }).catch(invalidFields => {
 
@@ -762,5 +764,5 @@ const validateCheckbox = field => {
 
     });
   });
-  
+
 });
