@@ -108,6 +108,7 @@ if(!isset($_SESSION["name"])){
                         <th>Invoice Amount</th>
                         <th>Tax Amount</th>
                         <th>CU Invoice Number</th>
+                        <th>CU Serial Number</th>
                         <th>Date</th>                        
                     </tr>
                 </thead>

@@ -90,6 +90,7 @@ $(document).ready(function(){
                         } 
                     },
                     { data: 'CUInvoiceNumber' },
+                    { data: 'CUSerialNumber'},
                     { data: 'dated'},               
                 ],
                 paging: true,
