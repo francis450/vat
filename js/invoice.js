@@ -75,6 +75,18 @@ $(document).ready(function () {
                 data: data,
                 columns: [
                     { data: 'invoiceNumber' },
+                    { 
+                        data: 'invoiceType',
+                        render: function (data, type, row) {
+                            if (row.invoiceType == 'vatable') {
+                                return 'Sales';
+                            } else if (row.invoiceType == 'purchase') {
+                                return 'Purchase';
+                            } else if(row.invoiceType == ''){
+                                return 'Purchase';
+                            }
+                        }
+                    },
                     { data: 'name' },
                     { data: 'customerPin' },
                     {
@@ -88,7 +100,7 @@ $(document).ready(function () {
                         data: 'amount',
                         render: function (data, type, row) {
                             console.log("vat: "+row.vat);
-                            return row.invoiceType != 'exempt' && row.invoiceType != 'exempt' ? parseFloat(data).toFixed(0) * 0.16 : 0;
+                            return row.invoiceType != 'exempt' && row.invoiceType != 'expense' ? parseFloat(data).toFixed(0) * 0.16 : 0;
                         }
                     },
 

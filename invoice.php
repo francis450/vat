@@ -104,6 +104,7 @@ if(!isset($_SESSION["name"])){
                 <thead>
                     <tr>
                         <th>Invoice Number</th>
+                        <th>Invoice Type</th>
                         <th>Business Name</th>
                         <th>Pin</th>
                         <th>Invoice Amount</th>
