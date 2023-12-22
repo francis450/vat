@@ -39,6 +39,7 @@ switch ($method) {
         $CUSerialNumber = sanitizeInput($data['CUSerialNumber']);
         $CUInvoiceNumber = sanitizeInput($data['CUInvoiceNumber']);
         $withholding = intval($data['withholding']); 
+        $tax = floatval($data['tax']);
         $paid = 0;
         if($data['paid']){
             $paid = 1;
@@ -46,8 +47,8 @@ switch ($method) {
         // $expenseORAsset = intval($data['expenseORAsset']);
         // $stmt = $con->prepare("INSERT INTO invoices (name, item, customerPin, amount, vat, invoiceDate, invoiceNumber, invoiceType, CUSerialNumber, CUInvoiceNumber, withholding, paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         // $stmt->bind_param("ssdssisssii", $name, $item, $customerPin, $amount, $vat, $invoiceDate, $invoiceNumber, $invoiceType, $CUSerialNumber, $CUInvoiceNumber, $withholding, $paid);
-        $stmt = "INSERT INTO invoices (name, item, customerPin, amount, vat, invoiceDate, invoiceNumber, invoiceType, CUSerialNumber, CUInvoiceNumber, withholding, paid)
-        VALUES ( '$name', '$item', '$customerPin', '$amount', '$vat', '$invoiceDate', '$invoiceNumber', '$invoiceType', '$CUSerialNumber', '$CUInvoiceNumber', '$withholding', '$paid')";
+        $stmt = "INSERT INTO invoices (`name`, `item`, `customerPin`, `amount`,`tax`, vat, invoiceDate, invoiceNumber, invoiceType, CUSerialNumber, CUInvoiceNumber, withholding, paid)
+        VALUES ( '$name', '$item', '$customerPin', '$amount', '$tax', '$vat', '$invoiceDate', '$invoiceNumber', '$invoiceType', '$CUSerialNumber', '$CUInvoiceNumber', '$withholding', '$paid')";
 
         if (mysqli_query($con, $stmt)) {
             echo  'Invoice Inserted Successfully';

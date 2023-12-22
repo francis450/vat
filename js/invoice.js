@@ -83,7 +83,7 @@ $(document).ready(function () {
                             } else if (row.invoiceType == 'purchase') {
                                 return 'Purchase';
                             } else if(row.invoiceType == ''){
-                                return 'Purchase';
+                                return 'Purchase8';
                             }
                         }
                     },
